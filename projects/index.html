@@ -264,6 +264,7 @@ xhttp.onreadystatechange = function() {
         button.setAttribute('id', 'button');
         const linking = document.createElement("a");
         linking.setAttribute('id', 'linking');
+        linking.setAttribute("target", "_blank");
         linking.innerHTML= "code";
         linking.href = result[i].html_url; 
 
