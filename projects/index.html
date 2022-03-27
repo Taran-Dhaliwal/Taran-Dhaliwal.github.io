@@ -71,6 +71,14 @@ a:active{
   color:white;
   font-size: 20px;
 }
+
+#demoLink{
+  text-align: center;
+  background-color:ff014f;
+  color:white;
+  font-size: 20px;
+}
+
 #name{
   text-align: center;
   background-color:ff014f;
@@ -80,13 +88,26 @@ a:active{
 #button{
   width:100px;
   margin: auto;
+  background-color:ff014f;
+  margin-bottom:0.7rem;
+}
+
+#button2{
+  width:100px;
+  margin: auto;
   background-color:ff014f; 
+  margin-bottom:0.7rem;
 }
 
 #button:hover {
   
    transform: scale(1.15); 
  }
+
+#button2:hover {
+  
+  transform: scale(1.15); 
+}
 
 #desc{
   padding:10px;
@@ -217,6 +238,7 @@ xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
        
        var result = JSON.parse(xhttp.responseText);
+       console.log(result);
        for (let i = 0; i < result.length; i++) {
         
 
@@ -236,7 +258,8 @@ xhttp.onreadystatechange = function() {
         lang.innerHTML= result[i].language;
 
        
-      
+        const button2 = document.createElement("button");
+        button2.setAttribute('id', 'button2');
         const button = document.createElement("button");
         button.setAttribute('id', 'button');
         const linking = document.createElement("a");
@@ -244,14 +267,25 @@ xhttp.onreadystatechange = function() {
         linking.innerHTML= "code";
         linking.href = result[i].html_url; 
 
-    
+     
         
         container.appendChild(division);
         division.appendChild(node);
         division.appendChild(des);
-      //  division.appendChild(lang);
+      
         division.appendChild(button);
         button.appendChild(linking);
+
+        if (result[i].has_pages) {
+					let demoLink = document.createElement("a");
+					demoLink.classList.add("demo-link");
+          demoLink.setAttribute('id', 'demoLink');
+					demoLink.setAttribute("href", "https://taranjotdhaliwal.me/" + result[i].name);
+					demoLink.setAttribute("target", "_blank");
+					demoLink.textContent = "Demo";
+          division.appendChild(button2);
+          button2.append(demoLink);
+				}
 
 
       }
